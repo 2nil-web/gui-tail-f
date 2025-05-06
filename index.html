@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/plain; charset=utf-8">
+  <title>Win Tail -f</title>
+  <link rel="icon" type="image/x-icon" href="app.svg">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <!--script type="text/javascript" src="head.js"></script-->
+  <style>
+  </style>
+
+<body>
+  <div class="topnav">
+    <a>Open file</a>
+    <a onclick="app.exit()">Quit</a>
+    <a>About</a>
+  </div>
+  <div class="file_view">
+  </div>
+</body>
+<script>
+  document.body.innerHTML += app.args_line;
+</script>
+
+</html>
