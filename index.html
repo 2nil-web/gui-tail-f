@@ -4,18 +4,18 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="Content-Type" content="text/plain; charset=utf-8">
-  <title>Win Tail -f</title>
+  <title>GUI tail -f 1.0.0</title>
   <link rel="icon" type="image/x-icon" href="app.svg">
   <link rel="stylesheet" type="text/css" href="style.css">
-  <!--script type="text/javascript" src="head.js"></script-->
+  <script type="text/javascript" src="head.js"></script>
   <style>
   </style>
 
 <body>
   <div class="topnav">
-    <a>Open file</a>
+    <a onclick="load_file()">Open</a>
     <a onclick="app.exit()">Quit</a>
-    <a>About</a>
+    <a style="position: absolute; right:10px;" onclick="about()">About</a>
   </div>
   <div class="file_view">
   </div>

@@ -82,6 +82,6 @@
 
     var path = fso().GetParentFolderName(WScript.ScriptFullName);
     var myArgs = new Args();
-    sha().ShellExecute(WEBAPP_PATH, path + " " + myArgs.GetAll(), path, "open", 1);
+    sha().ShellExecute(WEBAPP_PATH, path + " -d " + myArgs.GetAll(), path, "open", 1);
   </script>
 </job>

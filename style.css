@@ -27,15 +27,24 @@ body {
 
 .topnav a:hover {
   cursor: pointer;
-  /*background-color: #ddd;*/
   background-color: #aaffaa;
   color: blue;
 }
 
-#file_view {
+.topnav a:active {
+  background-color: blue;
+  color: #aaffaa;
+}
+
+.topnav a:focus {
+  background-color: blue;
+  color: #aaffaa;
+}
+
+.file_view {
   position: absolute;
   border: 1px solid black;
-  inset: 90px 8px 4px 8px;
+  inset: 40px 8px 4px 8px;
   /* top right bottom left */
   /*top: 110px; right: 8px; left: 8px; bottom: 4px;*/
   overflow-y: auto;
