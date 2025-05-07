@@ -1,38 +1,47 @@
 #/bin/bash
 
-pb_basename () {
-  nam=${*##*[/|\\]}  
-  echo ${*##*/}
-}
+if [ -z "$(type basename)" ]; then
+  basename() {
+    nam=${*##*[/|\]}
+    echo ${*##*/}
+  }
+fi
 
-pb_dirname() {
-  # Usage: dirname "path"
-  local tmp=${1:-.}
+if [ -z "$(type dirname)" ]; then
+  dirname() {
+    # Usage: dirname "path"
+    local tmp=${1:-.}
 
-  tmp=${tmp%%"${tmp##*[!/]}"}
+    tmp=${tmp%%"${tmp##*[!/]}"}
 
-  [[ ${tmp##*/*} ]] && tmp=.
+    [[ ${tmp##*/*} ]] && tmp=.
 
-  tmp=${tmp%/*}
-  tmp=${tmp%%"${tmp##*[!/]}"}
+    tmp=${tmp%/*}
+    tmp=${tmp%%"${tmp##*[!/]}"}
 
-  printf '%s\n' "${tmp:-/}"
-}
+    printf '%sn' "${tmp:-/}"
+  }
+fi
 
-pb_realpath () {
-  file="${1%/}"
-  parent_dir="${file%/*}"
-  [[ -f ${PWD}/${file##*/} ]] && { printf '%s\n' "${PWD}/${file##*/}"; return; }
-  cd "$parent_dir" &>/dev/null || exit 1 && printf '%s\n' "${PWD}/${file##*/}"
-}
+if [ -z "$(type realpath)" ]; then
+  realpath() {
+    file="${1%/}"
+    parent_dir="${file%/*}"
+    [[ -f ${PWD}/${file##*/} ]] && {
+      printf '%sn' "${PWD}/${file##*/}"
+      return
+    }
+    cd "$parent_dir" &>/dev/null || exit 1 && printf '%sn' "${PWD}/${file##*/}"
+  }
+fi
 
-curr_dir=$(pb_dirname $(pb_realpath $0))
+curr_dir=$(dirname $(realpath $0))
 
-if [ "$OSTYPE" == "cygwin*" ] || [ "$OSTYPE" == "msys*" ] 
-then
-  WEBAPP_PATH=$HOME/webapp/build/gcc/debian/webapp
+if [[ "${OSTYPE}" =~ ^"cygwin" ]] || [[ "${OSTYPE}" =~ ^"msys" ]]; then
+  WEBAPP_PATH="winpty C:\Users\Denis\Documents\home\33-webapp\build\msvc\win\x64\Release\webapp.exe"
 else
-  WEBAPP_PATH="winpty C:\\Users\\Denis\\Documents\\home\\33-webapp\\build\\msvc\\win\\x64\\Release\\webapp.exe"
+  WEBAPP_PATH=$HOME/webapp/build/gcc/debian/webapp
 fi
 
 ${WEBAPP_PATH} ${curr_dir} $*
+
